@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOB DECODE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        /* Buttons */
+        .btn1 {
+            font-size: 1rem;
+            font-weight: 400;
+            background-color: #2f3133;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none !important;
+            transition: all 0.5s;
+        }
+
+        .btn1:hover {
+            background-color: #e6edff;
+            color: #303054;
+        }
+
+        /* Heading */
+        .heading h2 {
+            font-size: 28px;
+            font-weight: 500;
+            border-left: 8px solid #303054;
+            padding: 5px 15px;
+            margin-bottom: 15px;
+        }
+
+        .heading p {
+            font-size: 18px;
+        }
+
+        .heading p span {
+            font-weight: 600;
+            color: #303054;
+        }
+
+        /* Header */
+        header {
+            background-color: #212529;
+            width: 100%;
+        }
+
+        header .navbar-brand {
+            font-size: 22px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        nav {
+            padding: 8px 0px !important;
+        }
+
+        .cont-sec {
+            padding: 8px;
+            background-color: #e6edff;
+            width: 100%;
+        }
+
+        .cont-sec .contact-cont {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .cont-sec p {
+            margin: 0;
+        }
+
+        .cont-sec p a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .cont-sec .social {
+            text-align: right
+        }
+
+        .cont-sec .social a img {
+            width: 20px;
+            margin-left: 15px;
+        }
+
+        .home-sec {
+            padding: 100px 0;
+        }
+
+        .home-sec .home-content {
+            align-items: center;
+        }
+
+        .home-sec .home-content h1 {
+            font-size: 2.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .home-sec .home-content h2 span {
+            color: #14e20d;
+        }
+
+        .home-sec .home-content h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .home-sec .home-content p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+        }
+
+        .home-sec .img-sec {
+            display: flex;
+            justify-content: center;
+        }
+
+        .home-sec .img-sec img {
+            width: 400px;
+        }
+
+        .home-sec .home-content {
+            align-items: center;
+            padding: 150px 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #343a40;
+            color: #e6edff;
+            padding: 50px 0;
+        }
+
+        footer h4 {
+            margin-bottom: 20px;
+        }
+
+        footer p a {
+            text-decoration: none;
+            color: #e6edff;
+        }
+
+        footer p a:hover {
+            text-decoration: none;
+            color: #e6edff;
+        }
+
+        footer .col-two ul li {
+            list-style: none;
+        }
+
+        footer .col-two ul li a {
+            color: #e6edff;
+            text-decoration: none;
+            transition: all 0.5s;
+        }
+
+        footer .col-two ul li a:hover {
+            margin-left: 5px;
+        }
+
+        footer .social {
+            margin-bottom: 30px;
+        }
+
+        footer .social a img {
+            width: 20px;
+            margin-right: 15px;
+        }
+
+        /* Scroll Bar */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            border: 7px solid transparent;
+        }
+
+        /* Contact Us */
+        .contact-section {
+            padding: 150px 0 80px;
+        }
+
+        .contact-section .contact-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .contact-section .contact-form .form-control {
+            height: 50px;
+            border-radius: 5px;
+        }
+
+        .contact-section .contact-form textarea.form-control {
+            height: 120px;
+            margin-bottom: 10px;
+        }
+
+        .contact-section .contact-form .form-control:focus {
+            box-shadow: none;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="fixed-top">
+        <header>
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-dark">
+                    <a class="navbar-brand" href="{{ url_for('decode') }}">DOB DECODE</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{ url_for('home') }}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('decode') }}">Decode</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#contact">Contact</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('about') }}">About Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+    </div>
+
+    <section class="home-sec" id="home">
+        <div class="container">
+            <div class="home-content">
+                <div class="row">
+                    <div class="col-lg-6 align-item-center">
+                        <div class="home-info">
+                            <h1>"Unlock the Secrets of Your Birthdate!"</h1>
+                            <h2>Your <span>Birthdate</span> Has a Tale to Tell. Decode It Now!</h2>
+                            <p><b><i>"Your Date of Birth Holds Mysteries! Click Below to Reveal Them All."</i></b></p>
+                            <div class="buttons">
+                                <!-- Correct the link here -->
+                                <a href="{{ url_for('decode') }}" class="btn1">Decode now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 order-first order-lg-last">
+                        <div class="img-sec">
+                            <img src="./static/home.jpg" alt="home-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="heading">
+                <h2>Connect With Us</h2>
+                <p>Fill this form to contact.</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 mt-5">
+                    <form class="contact-form">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Your Name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Mobile No.">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Address">
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" placeholder="Message"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <a href="#" class="btn1 mt-5">Submit Details</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h4>DOB DECODE</h4>
+                    <p>Address: 3, Bollikunta, Warangal, Telangana 506002</p>
+                    <p>Contact No: <a href="tel:+9198659****59">+91 98659****59</a></p>
+                    <p>Email: <a href="mailto:gmai@mail.com">gmai@mail.com</a></p>
+                </div>
+                <div class="col-lg-6">
+                    <h4>Important Links</h4>
+                    <ul>
+                        <li><a href="{{ url_for('home') }}"><i class="fa fa-home"></i> Home</a></li>
+                        <li><a href="{{ url_for('decode') }}"><i class="fa fa-code"></i> Decode</a></li>
+                        <li><a href="#contact"><i class="fa fa-envelope"></i> Contact</a></li>
+                        <li><a href="{{ url_for('about') }}"><i class="fa fa-info-circle"></i> About</a></li>
+                    </ul>
+                    <h4>Social Media</h4>
+                    <div class="social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-youtube"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                        <a href="#"><i class="fa fa-google"></i></a>
+                    </div>
+                    <p class="text-center">Copyright &copy; 2024 | All Rights Reserved Mani</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

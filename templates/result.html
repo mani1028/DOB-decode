@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOB Decode Results</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer {
+            margin-top: auto;
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            width: 100%;
+        }
+
+        .large-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .left-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .right-section {
+            flex: 1;
+        }
+
+        .big-container {
+            width: 100%;
+            max-width: 95%;
+            margin: 10px auto;
+            text-align: left;
+            background-color: #f8f9fa;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .results-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 10px auto;
+            text-align: left;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+         /* Header */
+         header {
+            background-color: #212529;
+            width: 100%;
+        }
+
+        header .navbar-brand {
+            font-size: 22px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        nav {
+            padding: 8px 0px !important;
+        }
+
+        .social-share-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            gap: 15px;
+        }
+    </style>
+    <script>
+        const NASA_API_KEY = 'DlcH35pI8ODKil0P6vaA1zce2a5Fkae7ZOoubMtF';
+
+        // Fetch Moon Image based on DOB
+        function fetchMoonImage(dob) {
+            const url = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}&date=${dob}`;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const moonImage = document.getElementById('moon-image');
+                    const moonDate = document.getElementById('moon-date');
+                    if (data.media_type === 'image') {
+                        moonImage.src = data.url;
+                        moonDate.innerText = `Image Date: ${data.date}`;
+                    } else {
+                        moonImage.alt = "No image available for this date.";
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching moon image:", error);
+                    document.getElementById('moon-date').innerText = "Error fetching moon image.";
+                });
+        }
+
+        // Share Results as an Image
+        function shareResults() {
+            const bigContainer = document.querySelector('.big-container');
+            html2canvas(bigContainer, { scale: 2 }).then(canvas => {
+                canvas.toBlob(blob => {
+                    saveAs(blob, 'result.png');
+                });
+            }).catch(error => console.error('Error capturing the content:', error));
+        }
+
+        // Chart.js Zodiac Radar Chart
+        function generateZodiacChart(zodiacSign, traits) {
+            const ctx = document.getElementById('zodiacChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Confidence', 'Energy', 'Creativity', 'Curiosity', 'Determination'],
+                    datasets: [{
+                        label: `${zodiacSign} Traits`,
+                        data: traits,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        r: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize Page Content
+        window.onload = function () {
+            const userDOB = "{{ dob }}";
+            const zodiacSign = "{{ zodiac_sign }}";
+            const zodiacTraits = [80, 90, 75, 85, 70]; // Replace with dynamic traits
+
+            fetchMoonImage(userDOB);
+            generateZodiacChart(zodiacSign, zodiacTraits);
+        };
+    </script>
+</head>
+
+<body>
+    <div class="fixed-top">
+        <header>
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-dark">
+                    <a class="navbar-brand" href="{{ url_for('decode') }}">DOB DECODE</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="{{ url_for('home') }}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('decode') }}">Decode</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#contact">Contact</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('about') }}">About Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+    </div>
+
+
+    <main>
+        <div class="big-container">
+            <div class="large-container">
+                <div class="left-section">
+                    <h3><b>Fun Age Facts</b></h3>
+                    <ul>
+                        <li>Heartbeats: {{ heartbeats }}</li>
+                        <li>Blinks: {{ blinks }}</li>
+                        <li>Full Moons Experienced: {{ full_moons }}</li>
+                    </ul>
+                    <div class="results-container">
+                        <h3>Zodiac Traits</h3>
+                        <canvas id="zodiacChart" width="400" height="400"></canvas>
+                    </div>
+                </div>
+                <div class="right-section">
+                    <div class="results-container">
+                        <p><strong>Date of Birth:</strong> {{ dob }}</p>
+                        <p><strong>Age in Years:</strong> {{ age_years }}</p>
+                        <p><strong>Age in Hours:</strong> {{ age_hours }}</p>
+                        <p><strong>Age in Minutes:</strong> {{ age_minutes }}</p>
+                        <p><strong>Age in Seconds:</strong> {{ age_seconds }}</p>
+                        <p><strong>Zodiac Sign:</strong> {{ zodiac_sign }}</p>
+                        <p><strong>Moon Phase:</strong> {{ moon_phase }}</p>
+                        <p><strong>Day of the Week:</strong> {{ day_of_week }}</p>
+                        <p><strong>Countdown to Next Birthday:</strong> {{ days_to_next_birthday }} days</p>
+                        <p><strong>Famous Personality with Same Birthday:</strong> {{ famous_personality }}</p>
+                        <p><strong>Lucky Number:</strong> {{ lucky_number }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="social-share-buttons">
+            <button class="btn btn-primary" onclick="shareResults()">Share</button>
+            <button class="btn btn-secondary" onclick="window.location.href='{{ url_for('decode') }}'">Decode Again</button>
+        </div>
+        
+    </main>
+
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2024 DOB Decode. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
