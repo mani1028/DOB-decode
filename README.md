@@ -29,6 +29,18 @@ A Python-based web application built with Flask that decodes the user's date of 
 Clone the repository to your local machine:
 
 git clone https://github.com/mani1028/dob-decode.git
+dob-decode/
+├── app.py                 # Flask main application file
+├── templates/             # HTML files for Flask
+│   ├── index.html
+│   ├── results.html
+│   ├── decode.html
+│   └── about.html
+├── static/                # CSS, JavaScript, images
+│   ├── style.css
+│   └── images
+├── requirements.txt       # Python dependencies
+├── vercel.json            # Vercel configuration
 
 ## License
 
