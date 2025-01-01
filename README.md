@@ -28,7 +28,6 @@ A Python-based web application built with Flask that decodes the user's date of 
 
 Clone the repository to your local machine:
 
-```bash
 git clone https://github.com/mani1028/dob-decode.git
 
 ## License
