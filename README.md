@@ -2,6 +2,10 @@
 
 A Python-based web application built with Flask that decodes the user's date of birth and displays personalized information.
 
+## Live Demo
+
+You can view the live demo of the application here: [Live Demo](https://dob-nine.vercel.app/)
+
 ## Features
 
 - Enter your Date of Birth (DOB) and decode the details.
@@ -16,9 +20,6 @@ A Python-based web application built with Flask that decodes the user's date of 
 - **JavaScript**: For dynamic and interactive components.
 - **Vercel**: Deployed on Vercel for serverless deployment.
 
-## Live Demo
-
-You can view the live demo of the application here: [Live Demo](https://dob-nine.vercel.app/)
 
 ## Setup and Installation
 
