@@ -34,7 +34,7 @@ You can view the live demo of the application here: [Live Demo](https://dob-nine
 Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/dob-decode.git
+https://github.com/mani1028/DOB-decode.git
 ```
 
 ### 2. Install Dependencies
