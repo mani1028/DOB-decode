@@ -3,7 +3,7 @@
 A Python-based web application built with Flask that decodes the user's date of birth and displays personalized information.
 
 ## Preview
-<img style="display: block;-webkit-user-select: none;margin: auto;cursor: zoom-in;background-color: hsl(0, 0%, 90%);transition: background-color 300ms;" src="https://github.com/mani1028/my-portfolio/blob/main/assets/project-3.png" width="1049" height="740">
+<img style="display: block;-webkit-user-select: none;margin: auto;cursor: zoom-in;background-color: hsl(0, 0%, 90%);transition: background-color 300ms;" src="https://github.com/mani1028/my-portfolio/blob/main/assets/project-3.png" width="1080" height="720">
 
 
 ## Live Demo
