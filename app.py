@@ -5,14 +5,19 @@ import os
 
 app = Flask(__name__)
 
-@app.route('/ads.txt')
-def serve_ads():
-    return send_from_directory(os.getcwd(), 'ads.txt', mimetype='text/plain')
-
 @app.route('/')
 def home():
     return render_template('index.html')
 
+
+@app.route('/ads.txt')
+def serve_ads():
+    return send_from_directory(os.getcwd(), 'ads.txt', mimetype='text/plain')
+
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory(os.getcwd(), 'sitemap.xml', mimetype='application/xml')
+    
 @app.route('/decode', methods=['GET', 'POST'])
 def decode():
     if request.method == 'POST':
