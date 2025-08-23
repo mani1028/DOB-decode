@@ -1,8 +1,13 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,  send_from_directory
 from datetime import datetime, timedelta
 import math
+import os
 
 app = Flask(__name__)
+
+@app.route('/ads.txt')
+def serve_ads():
+    return send_from_directory(os.getcwd(), 'ads.txt', mimetype='text/plain')
 
 @app.route('/')
 def home():
