@@ -8,7 +8,7 @@ A Python-based web application built with Flask that decodes the user's date of 
 
 ## Live Demo
 
-You can view the live demo of the application here: [Live Demo](https://dob-nine.vercel.app/)
+You can view the live demo of the application here: [Live Demo](https://dobdecode.vercel.app/)
 
 ## Features
 
